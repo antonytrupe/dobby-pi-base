@@ -17,11 +17,11 @@ def init():
             
     #get the count of tables with the name
     c.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND (name='historicdata' or name='currentdata') ''')
-    print('foo')
+    #print('foo')
     #print(c.fetchone()[0])
     #if the count is 1, then table exists
     if c.fetchone()[0] == 2 :
-        #print('Table exists.')
+        print('Tables exists.')
         None
     
     else :
