@@ -8,4 +8,4 @@ Rename this project to dobby-pi-base
 | remote jeenode sketches | dobby-jeenode-remote  |
 | read from jeenode sketch(python or nodejs) | dobby-pi-base |
 | mm module for temp/rh(nodejs) | MMM-IndoorTemp |
-| sync to google sheets(nodejs) | dobby-cloud-sync | house-stats-sync |
+| sync to google sheets(nodejs) | dobby-cloud-sync |
