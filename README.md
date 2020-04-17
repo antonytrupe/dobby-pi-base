@@ -1,11 +1,11 @@
 Python NodeJS module that runs on the raspberrypi and reads from jeenode connected on usb serial port  
-Rename this project to pi-base
+Rename this project to dobby-pi-base
 
 **Other Projects**  
 | description | new | old |
 | - | - | - |
-| base jeenode sketch(c++) | jeenode-base | JeeNode-Sketches/dht |
-| remote jeenode sketches | jeenode-remote  |
-| read from jeenode sketch(python or nodejs) | pi-base | house-sensor |
+| base jeenode sketch(c++) | dobby-jeenode-base | JeeNode-Sketches/dht |
+| remote jeenode sketches | dobby-jeenode-remote  |
+| read from jeenode sketch(python or nodejs) | dobby-pi-base | house-sensor |
 | mm module for temp/rh(nodejs) | MMM-IndoorTemp | MMM-HouseStatus |
-| sync to google sheets(nodejs) | house-stats-cloud-sync | house-stats-sync |
+| sync to google sheets(nodejs) | dobby-cloud-sync | house-stats-sync |
