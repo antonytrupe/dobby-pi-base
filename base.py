@@ -21,7 +21,7 @@ def init():
     #print(c.fetchone()[0])
     #if the count is 1, then table exists
     if c.fetchone()[0] == 2 :
-        print('Tables exists.')
+        print('Tables exist.')
         None
     
     else :
@@ -47,6 +47,7 @@ serialport = serial.Serial(port=USBPORT, baudrate=9600, timeout=0.5)
 
 while True:
     try:
+        #{"location":"living room","rh": 49.4}]
         command = serialport.readline()
         if command:
             #print('command:'+command.rstrip().decode('UTF-8').replace("'","\""))
@@ -58,41 +59,30 @@ while True:
                 cur = con.cursor()
                 #print('about to insert')
                 #TODO mark old records not active
-                #temp
                 cur.execute("insert into historicdata (location,attribute,value,datetime) "+
                             "values (:location,:attribute,:value,:datetime)",
                             {"location":data[0]["location"],
-                             "attribute":"tempC",
-                             "value":data[0]["t"],
+                             "attribute":data[0]["attribute"],
+                             "value":data[0]["value"],
                              "datetime":datetime.now().strftime("%Y-%m-%d %H:%M:%S")})
-                #relative humidity
-                cur.execute("insert into historicdata (location,attribute,value,datetime) "+
-                            "values (:location,:attribute,:value,:datetime)",
-                            {"location":data[0]["location"],
-                             "attribute":"rh",
-                             "value":data[0]["rh"],
-                             "datetime":datetime.now().strftime("%Y-%m-%d %H:%M:%S")})
-                
-                #current data upserts
-                cur.execute("insert into currentdata (location,attribute,value,datetime) "+
-                            "values (:location,:attribute,:value,:datetime) on conflict(location,attribute) do update set value=excluded.value, datetime=excluded.datetime",
-                             {"location":data[0]["location"],
-                              "attribute":"tempC",
-                              "value":data[0]["t"],
-                              "datetime":datetime.now().strftime("%Y-%m-%d %H:%M:%S")})
-
+                #print('inserted historical value')
+                #print('updating current value')
                 cur.execute("insert into currentdata (location,attribute,value,datetime) "+
                             "values (:location,:attribute,:value,:datetime) "+
                             "on conflict(location,attribute) do update set value=excluded.value, datetime=excluded.datetime",
                             {"location":data[0]["location"],
-                             "attribute":"rh",
-                             "value":data[0]["rh"],
+                             "attribute":data[0]["attribute"],
+                             "value":data[0]["value"],
                              "datetime":datetime.now().strftime("%Y-%m-%d %H:%M:%S")})
-
+                #print('updated current value')
     except serial.SerialException as e:
         #usb got unplugged
-        pass
-    except Exception as e:
-        print('e:')
+        print('serial.SerialException:')
         print(e)
-        pass
+    except json.JSONDecodeError as e:
+        print('serial.JSONDecodeError:')
+        print(e)
+        print(command)
+    except Exception as e:
+        print('Exception:')
+        print(e)
