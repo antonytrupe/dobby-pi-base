@@ -9,4 +9,4 @@ Python NodeJS module that runs on the raspberrypi and reads from jeenode connect
 | [MMM-IndoorTemp](//github.com/antonytrupe/MMM-IndoorTemp) | mm module for temp/rh | javascript/nodejs module/MM module |
 | [dobby-cloud-sync](//github.com/antonytrupe/dobby-cloud-sync) | sync to google sheets | javascript/nodejs module |
 | | collect internet speedtest data | python/nodejs module |
-| MMM-InternetStatus | display internet speedtest results | javascript/nodejs module/MM module) |
+| MMM-InternetStatus | display internet speedtest results | javascript/nodejs module/MM module |
