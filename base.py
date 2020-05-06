@@ -83,7 +83,8 @@ def pollUSB(con):
             print(e)
             
 def speedTest():
-    response = subprocess.Popen('/usr/local/bin/speedtest-cli --json', shell=True, stdout=subprocess.PIPE).stdout.read().decode('utf-8')
+    print('starting speedtest...')
+    response = subprocess.Popen('/usr/local/bin/speedtest-cli --json --server 29204', shell=True, stdout=subprocess.PIPE).stdout.read().decode('utf-8')
     print(response)
     data=json.loads(response.rstrip().replace("'","\""))
     print('{},{},{}'.format(datetime.now().strftime("%Y-%m-%d %H:%M:%S"),data["client"]["lat"],data["client"]["lon"]))
@@ -91,8 +92,7 @@ def speedTest():
 if __name__ == "__main__":
 #todo move file path to configuration
     databaseName="test.db"
-    con = lite.connect(databaseName)
     initDB(databaseName)
     thread1 = threading.Thread(target=pollUSB, args=(databaseName,))
-    #thread1.start()
-    speedTest()
+    thread1.start()
+    #speedTest()
