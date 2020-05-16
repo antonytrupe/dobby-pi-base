@@ -20,6 +20,7 @@ def initDB(databaseName):
         None
     
     else :
+        print('dobby-pi-base: missing 1 or more tables, creating...')
         c.execute('''CREATE TABLE IF NOT EXISTS historicdata (
                         location text NOT NULL,
                         attribute text not null,
@@ -81,18 +82,11 @@ def pollUSB(con):
         except Exception as e:
             print('Exception:')
             print(e)
-            
-def speedTest():
-    print('starting speedtest...')
-    response = subprocess.Popen('/usr/local/bin/speedtest-cli --json --server 29204', shell=True, stdout=subprocess.PIPE).stdout.read().decode('utf-8')
-    print(response)
-    data=json.loads(response.rstrip().replace("'","\""))
-    print('{},{},{}'.format(datetime.now().strftime("%Y-%m-%d %H:%M:%S"),data["client"]["lat"],data["client"]["lon"]))
 
 if __name__ == "__main__":
-#todo move file path to configuration
-    databaseName="test.db"
+    config = configparser.ConfigParser()
+    config.read("config.ini")
+    databaseName=config.get('default','databasePathAndName')
     initDB(databaseName)
     thread1 = threading.Thread(target=pollUSB, args=(databaseName,))
     thread1.start()
-    #speedTest()
