@@ -10,3 +10,10 @@ Python NodeJS module that runs on the raspberrypi and reads from jeenode connect
 | [dobby-cloud-sync](//github.com/antonytrupe/dobby-cloud-sync) | sync to google sheets | javascript/nodejs module |
 | [dobby-speedtest](//github.com/antonytrupe/dobby-speedtest) | collect internet speedtest data | python/nodejs module |
 | MMM-InternetStatus | display internet speedtest results | javascript/nodejs module/MM module |
+
+
+npm install -g node-gyp  
+npm install electron-rebuild  
+./node_modules/.bin/electron-rebuild -w sqlite3 -p  
+
+
