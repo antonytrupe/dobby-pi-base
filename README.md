@@ -16,4 +16,5 @@ npm install -g node-gyp
 npm install electron-rebuild  
 ./node_modules/.bin/electron-rebuild -w sqlite3 -p  
 
-
+get a list of usb devices
+lsusb
